@@ -2,6 +2,8 @@ package com.thoughtworks.parking_lot.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table
@@ -15,8 +17,13 @@ public class ParkingLot {
     @Column(unique = true)
     private String name;
     private String location;
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @JoinColumn(name = "parking_order_id",referencedColumnName = "id")
+    private List<ParkingOrder> parkingOrders;
 
-
+    public ParkingLot() {
+        parkingOrders = new ArrayList<>();
+    }
 
     public Long getId() {
         return id;
@@ -48,5 +55,13 @@ public class ParkingLot {
 
     public void setCapacity(int capacity) {
         this.capacity = capacity;
+    }
+
+    public List<ParkingOrder> getParkingOrders() {
+        return parkingOrders;
+    }
+
+    public void setParkingOrders(List<ParkingOrder> parkingOrders) {
+        this.parkingOrders = parkingOrders;
     }
 }
