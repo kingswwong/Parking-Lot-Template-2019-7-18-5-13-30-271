@@ -18,7 +18,7 @@ public class ParkingLot {
     private String name;
     private String location;
     @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-    @JoinColumn(name = "parking_order_id",referencedColumnName = "id")
+    @JoinColumn(name = "lot_id",referencedColumnName = "id")
     private List<ParkingOrder> parkingOrders;
 
     public ParkingLot() {
